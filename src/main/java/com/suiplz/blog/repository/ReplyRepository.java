@@ -3,11 +3,13 @@ package com.suiplz.blog.repository;
 import com.suiplz.blog.dto.ReplySaveRequestDto;
 import com.suiplz.blog.model.Reply;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface ReplyRepository extends JpaRepository<Reply,Integer>{
 
+    @Modifying
     @Query(value="INSERT INTO reply(userId, boardId, content, createDate) VALUES(?1,?2,?3,now())", nativeQuery = true)
-    void mSave(int userId, int boardId, String content);
+    int mSave(int userId, int boardId, String content); // 업데이트된 행의 개수를 리턴
 
 }

@@ -37,7 +37,7 @@ public class Board {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
 
-    @OneToMany(mappedBy = "board",fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아님 (FK 아님)
+    @OneToMany(mappedBy = "board",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아님 (FK 아님)
     @JsonIgnoreProperties({"board"})
     @OrderBy("id desc")
     private List<Reply> replys;
